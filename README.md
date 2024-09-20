@@ -1,5 +1,13 @@
 # Project App
 
+This is an application that allows users to have projects that contain tasks within them. It was implemented using the NextJS framework for the purposes of a coding exercise. It represents roughly 3 hours of work including time for research and discovery.
+
+## Working Features
+
+- Database is fully featured, with data relations handled via ORM
+- Displaying projects owned by different users
+- Allowing for changing of the user
+
 ## Dependencies
 
 - NodeJS
@@ -106,3 +114,5 @@ To be honest, there is quite a lot to implement. I did not get to handling authe
 CRUD operations will need to have their own forms. I was in the middle of producing a quick form to handle new projects, but I was in the middle of handling form input validation when I ran out of time. I would use a validation library such as Zod or the like to handle form validation.
 
 All CRUD operations still have to be implemented. I think getting the whole framework up and running took longer than anticipated.
+
+There is a major bug where the tasklist is not being shown correctly, but it is present in the data when console logged out. I'm sure this is some React timing issue where 
