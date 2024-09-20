@@ -1,12 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import prisma from "@/lib/prisma";
+import { GetServerSideProps, NextApiRequest, NextApiResponse } from "next";
 
-type ResponseData = {
-  message: string
-}
-
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+export default async function handler(
+  req: NextApiRequest, 
+  res: NextApiResponse
 ) {
-  res.status(200).json({ message: "Hello from the users endpoint"})
+  const { id } = req.query;
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: Number(id),
+    },
+    include: {
+      projects: true
+    }
+  })
+
+  res.status(200).json({data: user})
 }
