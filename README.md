@@ -9,6 +9,7 @@
 
 - Install dependencies using `npm i`
 - Create a database in postgres
+- Configure `.env` file with your database connection string
 
 ## Longstart
 
@@ -20,5 +21,5 @@ CREATE USER ford WITH ENCRYPTED PASSWORD 'mypass'
 GRANT ALL PRIVILEGES ON ford TO ford
 \c ford postgres
 GRANT ALL ON SCHEMA public TO ford;
-
 ```
+
