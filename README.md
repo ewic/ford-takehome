@@ -34,7 +34,7 @@ Within the psql interface, run the following commands to create a database and u
 ``` 
 CREATE DATABASE ford;
 CREATE USER ford WITH ENCRYPTED PASSWORD 'mypass'
-GRANT ALL PRIVILEGES ON ford TO ford
+GRANT ALL PRIVILEGES ON ford TO ford;
 \c ford postgres
 GRANT ALL ON SCHEMA public TO ford;
 ```
