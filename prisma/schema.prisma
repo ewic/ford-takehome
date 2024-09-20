@@ -19,5 +19,16 @@ model User {
 model Project {
   id          Int     @id @default(autoincrement())
   name        String  
-  owner       User[]
+  description String
+  owner       User    @relation(fields: [ownerId], references: [id])
+  ownerId     Int
+  tasks       Task[]
+}
+
+model Task {
+  id          Int     @id @default(autoincrement())
+  title       String  
+  description String
+  project     Project @relation(fields: [projectId], references: [id])
+  projectId   Int
 }
