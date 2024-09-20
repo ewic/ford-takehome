@@ -1,44 +1,64 @@
 'use client'
 
-import Header from "@/_components/Header";
 import RootLayout from "./layout";
 import ProjectList from "@/_components/ProjectList";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Project, User } from "@prisma/client";
+import NewProjectForm from "@/_components/NewProjectForm";
 
 // Dev for later, make this selectable
-const userId = 2; 
+const userId = 1; 
 
 export default function Home() {
+  const [users, setUsers] = useState<User[]>([]);
   const [user, setUser] = useState<User[] | null>(null);
-  const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
     fetchUser();
   }, [])
   
-  const fetchUser = async () => {
-    const res = await fetch(`/api/users/${userId}`)
+  async function fetchUser() {
+    // const res = await fetch(`/api/users/${userId}`)
+    const res = await fetch(`/api/users/`)
     const json = await res.json();
 
-    setUser(json.data)
-    setProjects(json.data.projects);
+    setUsers(json.data)
+    setUser(json.data[0])
   }
 
-  function expandNewProject() {
-    console.log("new proj")
+  async function handleSelectUser(event: ChangeEvent<HTMLSelectElement>) {
+    let id = event.target.value;
+
+    let user = users.find((user) => {
+      console.log(user);
+      return user.id == Number(id);
+    })
+
+    if (user) setUser(user)
   }
 
   return (
     <RootLayout>
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-        <h1 className="text-8xl font-extrabold">Project List For User: {user ? user.name : null}</h1>
+      <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+        <h1 className="w-full p-2 text-center text-8xl font-semibold">Project List { user ? `for ${user.name}` : null}</h1>
+        <select className="text-black" value={user ? user.id : 0} onChange={(evt) => handleSelectUser(evt)}>
+          {users.map(user => {
+            return (
+              <option value={user.id} key={user.id}>{user.name}</option>
+            )
+          })}
+        </select>
+        <div className="flex">
+          <div className="w-2/3">
+            <h2 className="font-bold text-6xl">Project List</h2>
+            <ProjectList projects={user ? user.projects : []} />
+          </div>
         
-        <button className="bg-red-700 p-2 rounded-lg" onClick={expandNewProject}>New Project</button>
+          <div id="new-project-form" className="w-1/3">
+          </div>
+        </div>
 
-        <ul>
-          <ProjectList projects={projects} />
-        </ul>
+        
       </div>
     </RootLayout>
   );

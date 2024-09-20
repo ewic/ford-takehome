@@ -23,7 +23,16 @@ export default async function handler(
 
     res.status(200).json({data: user});
   } else {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany( 
+      {
+        include: { 
+          projects: {
+            include: {
+              tasks: true}
+            } 
+          } 
+        } 
+      );
     res.status(200).json({ data: users})
   }
 
