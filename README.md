@@ -14,6 +14,11 @@
 
 ### Create User using Postgres
 
-```bash
-createuser ford -U postgres
+```
+CREATE DATABASE ford;
+CREATE USER ford WITH ENCRYPTED PASSWORD 'mypass'
+GRANT ALL PRIVILEGES ON ford TO ford
+\c ford postgres
+GRANT ALL ON SCHEMA public TO ford;
+
 ```
