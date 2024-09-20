@@ -3,11 +3,8 @@
 import RootLayout from "./layout";
 import ProjectList from "@/_components/ProjectList";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Project, User } from "@prisma/client";
-import NewProjectForm from "@/_components/NewProjectForm";
+import { User } from "@prisma/client";
 
-// Dev for later, make this selectable
-const userId = 1; 
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);

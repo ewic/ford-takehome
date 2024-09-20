@@ -15,7 +15,7 @@ export default function ProjectItem({project}: {project: Project}) {
 
   return(
     <div className="border rounded-t-lg m-2" >
-      <div className="p-2 rounded-t-lg flex flex-row bg-red-700 hover:bg-red-950" onClick={handleClick}>
+      <div className="p-2 rounded-t-lg flex flex-row bg-red-800 hover:bg-red-950" onClick={handleClick}>
         <div className="grow w-8/10">
           <h1 className="font-bold">{project.name}</h1>
           <h2 className="font-light italic">{project.description}</h2>
